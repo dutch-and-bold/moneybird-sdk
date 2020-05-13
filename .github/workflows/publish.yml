@@ -13,6 +13,8 @@ jobs:
           fetch-depth: 0
           
       - uses: aarnott/nbgv@master
+        with:
+          path: src/MoneybirdSdk.Client
         
       - name: Publish MoneybirdSdk.Client
         uses: rohith/publish-nuget@v2
