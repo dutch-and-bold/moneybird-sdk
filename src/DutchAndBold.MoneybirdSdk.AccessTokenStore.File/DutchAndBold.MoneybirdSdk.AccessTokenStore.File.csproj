@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Title>Moneybird SDK</Title>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Description>Access Token Store using System.IO.File</Description>
+        <Authors>Dutch and Bold</Authors>
+        <LangVersion>latest</LangVersion>
+
+        <PackageProjectUrl>https://github.com/dutch-and-bold/moneybird-sdk</PackageProjectUrl>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageIconUrl>https://github.com/dutch-and-bold/moneybird-sdk/raw/master/.github/moneybird-logo.png</PackageIconUrl>
+        <RepositoryUrl>https://github.com/dutch-and-bold/moneybird-sdk</RepositoryUrl>
+
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0" />
+      <PackageReference Include="System.IO.Abstractions" Version="11.0.6" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\DutchAndBold.MoneybirdSdk\DutchAndBold.MoneybirdSdk.csproj" />
+    </ItemGroup>
+
+</Project>
