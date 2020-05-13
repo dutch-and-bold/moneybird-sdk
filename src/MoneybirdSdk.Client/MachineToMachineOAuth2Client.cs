@@ -30,17 +30,20 @@ namespace MoneybirdSdk.Client
 
         public async Task<AccessToken> AcquireAccessTokenAsync()
         {
+            using var postBody = new StringContent(
+                $"client_id={_clientId}&client_secret={_clientSecret}&code={_authorizationCode}&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code",
+                Encoding.Default,
+                "application/x-www-form-urlencoded");
+
             var response = await _httpClient.PostAsync(
                 "token",
-                new StringContent(
-                    $"client_id={_clientId}&client_secret={_clientSecret}&code={_authorizationCode}&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code",
-                    Encoding.Default,
-                    "application/x-www-form-urlencoded"));
+                postBody);
 
             response.EnsureSuccessStatusCode();
 
             await using var responseStream = await response.Content.ReadAsStreamAsync();
-            var accessToken = await JsonSerializer.DeserializeAsync<AccessToken>(responseStream, _jsonSerializerOptions);
+            var accessToken =
+                await JsonSerializer.DeserializeAsync<AccessToken>(responseStream, _jsonSerializerOptions);
 
             return accessToken;
         }

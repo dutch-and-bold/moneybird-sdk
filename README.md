@@ -22,6 +22,38 @@ Not yet available.
 
 Not yet available.
 
+# API Implementation Progress
+
+| Resource                               | Status      |
+| -------------------------------------- | ----------- |
+| Administration                         | In progress |
+| Contacts                               | Planned     |
+| Custom fields                          | Planned     |
+| Document styles                        | Planned     |
+| Documents: General documents           | Planned     |
+| Documents: General journal documents   | Planned     |
+| Documents: Purchase invoices           | Planned     |
+| Documents: Receipts                    | Planned     |
+| Documents: Typeless documents          | Planned     |
+| Estimates                              | Planned     |
+| External sales invoices                | Planned     |
+| Financial accounts                     | Planned     |
+| Financial mutations                    | Planned     |
+| Financial statements                   | Planned     |
+| Identities                             | Planned     |
+| Import mappings                        | Planned     |
+| Ledger accounts                        | Planned     |
+| Products                               | Planned     |
+| Projects                               | Planned     |
+| Recurring sales invoices               | Planned     |
+| Sales invoices                         | Planned     |
+| Tax rates                              | Planned     |
+| Verifications                          | Planned     |
+| Webhooks                               | Planned     |
+| Workflows                              | Planned     |
+
+More information about resources can be found [here](https://developer.moneybird.com/api/administration/)
+
 ## Project structure
 
 The solution is divided in several projects. All these projects have a purpose explained below.
@@ -36,13 +68,20 @@ This is the main directory holding all the projects.
     |/MoneybirdSdk.Client
 ```
 
-This directory contains the client project which is able to create an authenticated connection to the Moneybird API.
+This project contains the Moneybird base client with OAuth authentication and in memory token store.
+
+```
+    |/MoneybirdSdk.Client.AccessTokenStore.File
+```
+
+This project contains an alternative token store and accessor which uses `System.IO.File`.
+This offers an alternative of using the in memory token store variant which will not persist after the application restarts.
 
 ```
     |/MoneybirdSdk.Domain
 ```
 
-This directory contains the 'domain' of Moneybird. Consisting of entities and repository interfaces.
+This project contains the 'domain' of Moneybird. Consisting of entities and repository interfaces.
 
 ```
     |/MoneybirdSdk.Extensions.Microsoft.DependencyInjection
@@ -57,6 +96,18 @@ Please [open an issue](https://github.com/dutch-and-bold/moneybird-sdk/issues/ne
 ## Contributing
 
 Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/dutch-and-bold/moneybird-sdk/compare/).
+
+### Setting up the project
+
+1. Clone the project to a local directory
+2. Restore packages with nuget
+
+**Requirements**
+* Dotnet SDK >= 3.1
+
+#### Running tests
+
+The project contains several XUnit unit tests, the tests can be run with `dotnet test`.
 
 ### Coding style and rules
 
