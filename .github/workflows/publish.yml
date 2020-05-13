@@ -1,8 +1,8 @@
 name: Publish to nuget
 on:
   push:
-    tags: 
-      - v*
+    branches: 
+      - master
 jobs:
   publish:
     name: Build, pack & publish
@@ -13,14 +13,12 @@ jobs:
           fetch-depth: 0
           
       - uses: aarnott/nbgv@master
-        id: nbgv
         
       - name: Publish MoneybirdSdk.Client
-        id: publish_to_nuget
         uses: rohith/publish-nuget@v2
         with:
           PROJECT_FILE_PATH: src/MoneybirdSdk.Client/MoneybirdSdk.Client.csproj
-          VERSION_STATIC: ${{ steps.nbgv.outputs.SemVer2 }}
+          VERSION_STATIC: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
           TAG_COMMIT: false
           NUGET_KEY: ${{secrets.API_KEY_NUGET}}
           INCLUDE_SYMBOLS: true

@@ -1,4 +1,4 @@
-<img src="https://github.com/dutch-and-bold/moneybird-sdk/raw/master/.github/moneybird-logo.png" alt="Moneybird SDK Project Logo" title="Moneybird" align="right" height="60" srcset="https://github.com/dutch-and-bold/moneybird-sdk/raw/master/.github/moneybird-logo@2x.png 2x"/>
+<img src="https://github.com/dutch-and-bold/moneybird-sdk/raw/master/.github/moneybird-logo.png" alt="Moneybird SDK Project Logo" title="Moneybird" align="right" height="64" srcset="https://github.com/dutch-and-bold/moneybird-sdk/raw/master/.github/moneybird-logo@2x.png 2x"/>
  
  # Moneybird SDK
  
