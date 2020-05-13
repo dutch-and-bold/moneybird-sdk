@@ -22,7 +22,7 @@ Not yet available.
 
 Not yet available.
 
-# API Implementation Progress
+## API Implementation Progress
 
 | Resource                               | Status      |
 | -------------------------------------- | ----------- |
