@@ -14,12 +14,12 @@ jobs:
           
       - uses: aarnott/nbgv@master
         with:
-          path: src/MoneybirdSdk.Client
+          path: src/DutchAndBold.MoneybirdSdk
         
-      - name: Publish MoneybirdSdk.Client
+      - name: Publish MoneybirdSdk
         uses: rohith/publish-nuget@v2
         with:
-          PROJECT_FILE_PATH: src/MoneybirdSdk.Client/MoneybirdSdk.Client.csproj
+          PROJECT_FILE_PATH: src/DutchAndBold.MoneybirdSdk/DutchAndBold.MoneybirdSdk.csproj
           VERSION_STATIC: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
           TAG_COMMIT: false
           NUGET_KEY: ${{secrets.API_KEY_NUGET}}
