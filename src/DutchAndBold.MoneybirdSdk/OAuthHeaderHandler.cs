@@ -19,8 +19,8 @@ namespace DutchAndBold.MoneybirdSdk
             IAccessTokenStore accessTokenStore,
             IAccessTokenRefresher accessTokenRefresher = null)
         {
-            _accessTokenAccessor = accessTokenAccessor;
-            _accessTokenStore = accessTokenStore;
+            _accessTokenAccessor = accessTokenAccessor ?? throw new ArgumentNullException(nameof(accessTokenAccessor));
+            _accessTokenStore = accessTokenStore ?? throw new ArgumentNullException(nameof(accessTokenStore));
             _accessTokenRefresher = accessTokenRefresher;
         }
 
@@ -36,17 +36,23 @@ namespace DutchAndBold.MoneybirdSdk
 
             var accessToken = _accessTokenAccessor.AccessToken;
 
+            if (accessToken == null)
+            {
+                throw new InvalidOperationException("Missing access token.");
+            }
+
             if (accessToken.IsExpired)
             {
                 if (_accessTokenRefresher == null)
                 {
                     throw new InvalidOperationException(
-                        "Access token acquirer is required when current access token is expired, invalid or empty.");
+                        $"Access token is expired and there is no [{nameof(IAccessTokenRefresher)}].");
                 }
 
                 accessToken = await _accessTokenRefresher.RefreshAccessToken(
                     accessToken.RefreshToken,
                     cancellationToken);
+
                 await _accessTokenStore.StoreTokenAsync(accessToken, cancellationToken);
             }
 
