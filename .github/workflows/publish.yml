@@ -21,11 +21,10 @@ jobs:
           path: src/DutchAndBold.MoneybirdSdk
         
       - uses: rohith/publish-nuget@v2
-        if: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
         with:
           PROJECT_FILE_PATH: src/DutchAndBold.MoneybirdSdk/DutchAndBold.MoneybirdSdk.csproj
           VERSION_STATIC: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
           NUGET_KEY: ${{secrets.API_KEY_NUGET}}
           INCLUDE_SYMBOLS: true
-          TAG_COMMIT: true
+          TAG_COMMIT: ${{ steps.nbgv.outputs.publicRelease }}
           TAG_FORMAT: v*

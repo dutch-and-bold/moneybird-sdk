@@ -121,14 +121,16 @@ This package uses [SemVer v2](https://semver.org). Patch versions are automatica
 
 When releasing a new version we can create a release branch using nbgv.
 
-1. Run `nbgv prepare-release`
-2. This has now created a new release/v1.* branch.
+* Run `nbgv prepare-release`.
+* This has now created a new release/v1.* branch.
+* Pushing this branch will trigger the package publish workflow with a stable version number (eg: 1.0.*).
+* Pushing to the master branch will trigger the package publish workflow with an new feature alpha version number (eg: 1.1.*-alpha).
 
-** More information will follow.
+** Please note that commits are automatically tagged by the publish workflow. Except for non-public releases.
 
 **Requirements**
 
-* Nerdbank.GitVersioning CLI, install with dotnet `dotnet tool install -g nbgv`
+* Nerdbank.GitVersioning CLI, install with dotnet `dotnet tool install -g nbgv`.
 
 ### Interesting reads
 
