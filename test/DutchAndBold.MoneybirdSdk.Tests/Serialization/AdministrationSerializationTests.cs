@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using DutchAndBold.MoneybirdSdk.Domain.Models.AdministrationAggregate;
-using DutchAndBold.MoneybirdSdk.Serialization;
-using NodaMoney;
 using TimeZoneConverter;
 using Xunit;
 
@@ -18,20 +16,12 @@ namespace DutchAndBold.MoneybirdSdk.Tests.Serialization
         {
             var responseString = File.ReadAllText("Resources/ApiResponses/administration.json");
 
-            var jsonOptions = new JsonSerializerOptions()
-            {
-                Converters =
-                {
-                    new JsonTimeZoneConverter(),
-                    new JsonCurrencyConverter()
-                },
-                PropertyNamingPolicy = new JsonSnakeCaseNamingPolicy(),
-            };
+            var jsonOptions = new JsonSerializerOptions().Moneybird();
 
             var administrations = JsonSerializer.Deserialize<List<Administration>>(responseString, jsonOptions);
 
             Assert.Equal(TZConvert.GetTimeZoneInfo("Europe/Amsterdam"), administrations.First().TimeZone);
-            Assert.Equal(Currency.FromCode("EUR"), administrations.First().Currency);
+            Assert.Equal("EUR", administrations.First().Currency.IsoSymbol);
 
             var jsonString = JsonSerializer.Serialize(administrations, jsonOptions);
 

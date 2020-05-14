@@ -1,5 +1,5 @@
 using System;
-using NodaMoney;
+using NMoneys;
 
 namespace DutchAndBold.MoneybirdSdk.Domain.Models.AdministrationAggregate
 {

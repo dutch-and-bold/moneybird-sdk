@@ -24,7 +24,7 @@ namespace DutchAndBold.MoneybirdSdk
             response.EnsureSuccessStatusCode();
 
             await using var responseStream = await response.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync<T>(responseStream, null, cancellationToken);
+            return await JsonSerializer.DeserializeAsync<T>(responseStream, new JsonSerializerOptions().Moneybird(), cancellationToken);
         }
     }
 }
