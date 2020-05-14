@@ -12,6 +12,8 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
             this IServiceCollection services,
             Uri moneybirdApiBaseUri)
         {
+            services.AddTransient<OAuthHeaderHandler>();
+            
             services.AddHttpClient<MoneybirdClient>(c => { c.BaseAddress = moneybirdApiBaseUri; })
                 .AddHttpMessageHandler<OAuthHeaderHandler>();
 
