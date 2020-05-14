@@ -13,9 +13,10 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
             Uri moneybirdApiBaseUri)
         {
             services.AddTransient<OAuthHeaderHandler>();
-            
-            services.AddHttpClient<MoneybirdClient>(c => { c.BaseAddress = moneybirdApiBaseUri; })
-                .AddHttpMessageHandler<OAuthHeaderHandler>();
+
+            services.AddHttpClient("moneybird", c => { c.BaseAddress = moneybirdApiBaseUri; })
+                .AddHttpMessageHandler<OAuthHeaderHandler>()
+                .AddTypedClient<IMoneybirdClient, MoneybirdClient>();
 
             return services;
         }
@@ -26,7 +27,7 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
             string clientId,
             string clientSecret)
         {
-            services.AddHttpClient("client.authority", c => c.BaseAddress = authority)
+            services.AddHttpClient("moneybird.authority", c => c.BaseAddress = authority)
                 .AddTypedClient<IAccessTokenRefresher>(
                     (c, s) => new MachineToMachineOAuth2Client(c, clientId, clientSecret))
                 .AddTypedClient<IAccessTokenAcquirer>(
