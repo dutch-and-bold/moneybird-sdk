@@ -16,7 +16,14 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\DutchAndBold.MoneybirdSdk.Domain\DutchAndBold.MoneybirdSdk.Domain.csproj" />
       <ProjectReference Include="..\..\src\DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection\DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Resources\ApiResponses\administration.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

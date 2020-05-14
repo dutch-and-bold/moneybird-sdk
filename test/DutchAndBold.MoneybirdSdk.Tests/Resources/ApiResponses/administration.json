@@ -1,0 +1,10 @@
+[
+  {
+    "id": 123,
+    "name": "Parkietje B.V.",
+    "language": "nl",
+    "currency": "EUR",
+    "country": "NL",
+    "time_zone": "Europe/Amsterdam"
+  }
+]
