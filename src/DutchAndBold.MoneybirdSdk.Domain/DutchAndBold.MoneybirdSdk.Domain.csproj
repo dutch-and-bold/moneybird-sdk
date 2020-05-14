@@ -4,16 +4,6 @@
         <Title>Moneybird SDK</Title>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Description>Domain entites for Moneybird SDK</Description>
-        <Authors>Dutch and Bold</Authors>
-        <LangVersion>latest</LangVersion>
-
-        <PackageProjectUrl>https://github.com/dutch-and-bold/moneybird-sdk</PackageProjectUrl>
-        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-        <PackageIconUrl>https://github.com/dutch-and-bold/moneybird-sdk/raw/master/.github/moneybird-logo.png</PackageIconUrl>
-        <RepositoryUrl>https://github.com/dutch-and-bold/moneybird-sdk</RepositoryUrl>
-
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <ItemGroup>
