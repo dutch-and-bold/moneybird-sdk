@@ -1,4 +1,6 @@
 using System;
+using System.IO.Abstractions;
+using DutchAndBold.MoneybirdSdk.AccessTokenStore.File;
 using DutchAndBold.MoneybirdSdk.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,12 +22,13 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
             this IServiceCollection services,
             Uri authority,
             string clientId,
-            string clientSecret,
-            string authorizationCode)
+            string clientSecret)
         {
             services.AddHttpClient("client.authority", c => c.BaseAddress = authority)
+                .AddTypedClient<IAccessTokenRefresher>(
+                    (c, s) => new MachineToMachineOAuth2Client(c, clientId, clientSecret))
                 .AddTypedClient<IAccessTokenAcquirer>(
-                    (c, s) => new MachineToMachineOAuth2Client(c, clientId, clientSecret, authorizationCode));
+                    (c, s) => new MachineToMachineOAuth2Client(c, clientId, clientSecret));
 
             return services;
         }
@@ -35,6 +38,15 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
             services.AddSingleton<InMemoryAccessTokenStore>();
             services.AddSingleton<IAccessTokenAccessor>(s => s.GetService<InMemoryAccessTokenStore>());
             services.AddSingleton<IAccessTokenStore>(s => s.GetService<InMemoryAccessTokenStore>());
+
+            return services;
+        }
+
+        public static IServiceCollection AddFileTokenStore(this IServiceCollection services, string fileLocation)
+        {
+            services.AddSingleton(s => new FileAccessTokenStore(s.GetService<IFile>(), fileLocation));
+            services.AddSingleton<IAccessTokenAccessor>(s => s.GetService<FileAccessTokenStore>());
+            services.AddSingleton<IAccessTokenStore>(s => s.GetService<FileAccessTokenStore>());
 
             return services;
         }

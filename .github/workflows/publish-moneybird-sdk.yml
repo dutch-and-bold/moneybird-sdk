@@ -5,10 +5,11 @@ on:
       - master
     paths:
       - src/DutchAndBold.MoneybirdSdk/**
+      - src/DutchAndBold.MoneybirdSdk.Domain/**
     
 jobs:
   publish:
-    name: Build, pack & publish
+    name: Version, Build, pack & publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

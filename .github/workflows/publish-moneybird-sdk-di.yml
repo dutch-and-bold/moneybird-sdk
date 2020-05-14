@@ -1,0 +1,30 @@
+name: Publish MoneybirdSdk - Dependency Injection
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - src/**
+
+jobs:
+  publish:
+    name: Version, Build, pack & publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: aarnott/nbgv@master
+        id: nbgv
+        with:
+          path: src/DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
+
+      - uses: rohith/publish-nuget@v2
+        with:
+          PROJECT_FILE_PATH: src/DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection/DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection.csproj
+          VERSION_STATIC: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
+          NUGET_KEY: ${{secrets.API_KEY_NUGET}}
+          INCLUDE_SYMBOLS: true
+          TAG_COMMIT: ${{ steps.nbgv.outputs.publicRelease }}
+          TAG_FORMAT: v*

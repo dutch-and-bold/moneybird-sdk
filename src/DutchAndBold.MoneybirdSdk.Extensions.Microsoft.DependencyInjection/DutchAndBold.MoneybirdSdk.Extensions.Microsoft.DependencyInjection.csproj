@@ -13,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DutchAndBold.MoneybirdSdk.AccessTokenStore.File\DutchAndBold.MoneybirdSdk.AccessTokenStore.File.csproj" />
       <ProjectReference Include="..\DutchAndBold.MoneybirdSdk\DutchAndBold.MoneybirdSdk.csproj" />
     </ItemGroup>
 

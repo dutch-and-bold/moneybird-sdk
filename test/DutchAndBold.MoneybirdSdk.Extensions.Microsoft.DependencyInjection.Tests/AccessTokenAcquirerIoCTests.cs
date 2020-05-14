@@ -21,8 +21,7 @@ namespace MoneybirdSdk.Extensions.Microsoft.DependencyInjection.Tests
             services.AddMoneybirdMachineToMachineAuthentication(
                 new Uri(AuthorityUrl),
                 "clientId",
-                "clientSecret",
-                "authorizationCode");
+                "clientSecret");
 
             var serviceProvider = services.BuildServiceProvider();
 
