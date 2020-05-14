@@ -4,6 +4,7 @@ on:
     branches:
       - master
     paths:
+      - .github/workflows/publish-moneybird-sdk-di.yml
       - src/**
 
 jobs:
