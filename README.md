@@ -113,6 +113,23 @@ The project contains several XUnit unit tests, the tests can be run with `dotnet
 
 This project adopts the Microsoft recommended code quality rules and .NET API usage rules. To adhere to these rules the project uses [Microsoft.CodeAnalysis.FxCopAnalyzers](https://www.nuget.org/packages/Microsoft.CodeAnalysis.FxCopAnalyzers/) package for code analysis in all projects.
 
+### Releasing
+
+This package uses [SemVer v2](https://semver.org). Patch versions are automatically 'upped' when pushing to master using [Nerdbank.GitVersioning](https://github.com/dotnet/Nerdbank.GitVersioning).
+
+#### Releasing a new feature
+
+When releasing a new version we can create a release branch using nbgv.
+
+1. Run `nbgv prepare-release`
+2. This has now created a new release/v1.* branch.
+
+** More information will follow.
+
+**Requirements**
+
+* Nerdbank.GitVersioning CLI, install with dotnet `dotnet tool install -g nbgv`
+
 ### Interesting reads
 
 * [Make HTTP requests using IHttpClientFactory in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1)

@@ -1,8 +1,11 @@
-name: Publish to nuget
+name: Publish MoneybirdSdk
 on:
   push:
     branches: 
       - master
+    paths:
+      - src/DutchAndBold.MoneybirdSdk/**
+    
 jobs:
   publish:
     name: Build, pack & publish
@@ -17,11 +20,12 @@ jobs:
         with:
           path: src/DutchAndBold.MoneybirdSdk
         
-      - name: Publish MoneybirdSdk
-        uses: rohith/publish-nuget@v2
+      - uses: rohith/publish-nuget@v2
+        if: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
         with:
           PROJECT_FILE_PATH: src/DutchAndBold.MoneybirdSdk/DutchAndBold.MoneybirdSdk.csproj
           VERSION_STATIC: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
-          TAG_COMMIT: false
           NUGET_KEY: ${{secrets.API_KEY_NUGET}}
           INCLUDE_SYMBOLS: true
+          TAG_COMMIT: true
+          TAG_FORMAT: v*
