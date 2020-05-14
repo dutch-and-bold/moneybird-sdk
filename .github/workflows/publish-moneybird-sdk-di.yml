@@ -26,5 +26,5 @@ jobs:
           VERSION_STATIC: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
           NUGET_KEY: ${{secrets.API_KEY_NUGET}}
           INCLUDE_SYMBOLS: true
-          TAG_COMMIT: ${{ steps.nbgv.outputs.publicRelease }}
+          TAG_COMMIT: ${{ steps.nbgv.outputs.publicRelease == 'True' }}
           TAG_FORMAT: v*
