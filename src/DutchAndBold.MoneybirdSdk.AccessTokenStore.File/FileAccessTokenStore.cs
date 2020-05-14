@@ -1,3 +1,4 @@
+using System;
 using System.IO.Abstractions;
 using System.Text.Json;
 using System.Threading;
@@ -14,7 +15,7 @@ namespace DutchAndBold.MoneybirdSdk.AccessTokenStore.File
 
         public FileAccessTokenStore(IFile systemFile, string fileLocation)
         {
-            _systemFile = systemFile;
+            _systemFile = systemFile ?? throw new ArgumentNullException(nameof(systemFile));
             _fileLocation = fileLocation;
             AccessToken = ReadFromFileLocationAsync().Result;
         }
