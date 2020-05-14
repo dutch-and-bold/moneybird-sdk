@@ -6,6 +6,7 @@ on:
     paths:
       - .github/workflows/publish-moneybird-sdk.yml
       - src/DutchAndBold.MoneybirdSdk/**
+      - src/DutchAndBold.MoneybirdSdk.Domain/**
     
 jobs:
   publish:
