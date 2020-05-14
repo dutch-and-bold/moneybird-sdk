@@ -44,6 +44,8 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
 
         public static IServiceCollection AddFileTokenStore(this IServiceCollection services, string fileLocation)
         {
+            services.AddTransient<IFileSystem, FileSystem>();
+            services.AddTransient(s => s.GetService<IFileSystem>().File);
             services.AddSingleton(s => new FileAccessTokenStore(s.GetService<IFile>(), fileLocation));
             services.AddSingleton<IAccessTokenAccessor>(s => s.GetService<FileAccessTokenStore>());
             services.AddSingleton<IAccessTokenStore>(s => s.GetService<FileAccessTokenStore>());
