@@ -8,7 +8,7 @@ namespace DutchAndBold.MoneybirdSdk.Domain.Models.AdministrationAggregate
         /// <summary>
         /// Administration id.
         /// </summary>
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Administration name.

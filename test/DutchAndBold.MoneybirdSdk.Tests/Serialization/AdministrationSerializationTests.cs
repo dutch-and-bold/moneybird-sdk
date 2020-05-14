@@ -20,6 +20,8 @@ namespace DutchAndBold.MoneybirdSdk.Tests.Serialization
 
             var administrations = JsonSerializer.Deserialize<List<Administration>>(responseString, jsonOptions);
 
+            Assert.Equal("322222222211111111", administrations.First().Id);
+            
             Assert.Equal(TZConvert.GetTimeZoneInfo("Europe/Amsterdam"), administrations.First().TimeZone);
             Assert.Equal("EUR", administrations.First().Currency.IsoSymbol);
 
