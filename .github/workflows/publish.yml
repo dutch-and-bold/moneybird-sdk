@@ -13,6 +13,7 @@ jobs:
           fetch-depth: 0
           
       - uses: aarnott/nbgv@master
+        id: nbgv
         with:
           path: src/DutchAndBold.MoneybirdSdk
         
