@@ -1,0 +1,31 @@
+name: Publish MoneybirdSdk - Domain
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/publish-moneybird-sdk-domain.yml
+      - src/DutchAndBold.MoneybirdSdk.Domain/**
+
+jobs:
+  publish:
+    name: Version, Build, pack & publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: aarnott/nbgv@master
+        id: nbgv
+        with:
+          path: src/DutchAndBold.MoneybirdSdk.Domain
+
+      - uses: rohith/publish-nuget@v2
+        with:
+          PROJECT_FILE_PATH: src/DutchAndBold.MoneybirdSdk.Domain/DutchAndBold.MoneybirdSdk.Domain.csproj
+          VERSION_STATIC: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
+          NUGET_KEY: ${{secrets.API_KEY_NUGET}}
+          INCLUDE_SYMBOLS: true
+          TAG_COMMIT: ${{ steps.nbgv.outputs.publicRelease == 'True' }}
+          TAG_FORMAT: v*
