@@ -5,7 +5,7 @@ on:
       - master
     paths:
       - .github/workflows/publish-moneybird-sdk-di.yml
-      - src/**
+      - src/DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection/**
 
 jobs:
   publish:

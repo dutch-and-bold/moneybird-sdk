@@ -1,12 +1,12 @@
-name: Publish MoneybirdSdk
+name: Publish MoneybirdSdk - Access Token Store (File)
 on:
   push:
-    branches: 
+    branches:
       - master
     paths:
-      - .github/workflows/publish-moneybird-sdk.yml
-      - src/DutchAndBold.MoneybirdSdk/**
-    
+      - .github/workflows/publish-moneybird-sdk-ats-file.yml
+      - src/DutchAndBold.MoneybirdSdk.AccessTokenStore.File/**
+
 jobs:
   publish:
     name: Version, Build, pack & publish
@@ -15,15 +15,15 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          
+
       - uses: aarnott/nbgv@master
         id: nbgv
         with:
-          path: src/DutchAndBold.MoneybirdSdk
-        
+          path: src/DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
+
       - uses: rohith/publish-nuget@v2
         with:
-          PROJECT_FILE_PATH: src/DutchAndBold.MoneybirdSdk/DutchAndBold.MoneybirdSdk.csproj
+          PROJECT_FILE_PATH: src/DutchAndBold.MoneybirdSdk.AccessTokenStore.File/DutchAndBold.MoneybirdSdk.AccessTokenStore.File.csproj
           VERSION_STATIC: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
           NUGET_KEY: ${{secrets.API_KEY_NUGET}}
           INCLUDE_SYMBOLS: true
