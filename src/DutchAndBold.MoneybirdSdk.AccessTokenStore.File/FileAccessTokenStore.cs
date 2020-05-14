@@ -11,6 +11,7 @@ namespace DutchAndBold.MoneybirdSdk.AccessTokenStore.File
     public class FileAccessTokenStore : IAccessTokenStore, IAccessTokenAccessor
     {
         private readonly IFile _systemFile;
+
         private readonly string _fileLocation;
 
         public FileAccessTokenStore(IFile systemFile, string fileLocation)
@@ -48,7 +49,12 @@ namespace DutchAndBold.MoneybirdSdk.AccessTokenStore.File
         {
             return _systemFile.WriteAllTextAsync(
                 _fileLocation,
-                JsonSerializer.Serialize(accessToken),
+                JsonSerializer.Serialize(
+                    accessToken,
+                    new JsonSerializerOptions
+                    {
+                        WriteIndented = true,
+                    }),
                 cancellationToken);
         }
     }
