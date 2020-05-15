@@ -26,8 +26,8 @@ Not yet available.
 
 | Resource                               | Status      |
 | -------------------------------------- | ----------- |
-| Administration                         | In progress |
-| Contacts                               | Planned     |
+| Administration                         | ✅          |
+| Contacts                               | In progress |
 | Custom fields                          | Planned     |
 | Document styles                        | Planned     |
 | Documents: General documents           | Planned     |
