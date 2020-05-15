@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DutchAndBold.MoneybirdSdk.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DutchAndBold.MoneybirdSdk.AccessTokenStore.Tests", "test\DutchAndBold.MoneybirdSdk.AccessTokenStore.Tests\DutchAndBold.MoneybirdSdk.AccessTokenStore.Tests.csproj", "{1FFE166C-7BEF-41C2-A50D-E10E585A6661}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DutchAndBold.MoneybirdSdk.Domain.Tests", "test\DutchAndBold.MoneybirdSdk.Domain.Tests\DutchAndBold.MoneybirdSdk.Domain.Tests.csproj", "{B6914FA4-D1A6-4C32-B995-1A45D543C21B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,10 +118,23 @@ Global
 		{1FFE166C-7BEF-41C2-A50D-E10E585A6661}.Release|x64.Build.0 = Release|Any CPU
 		{1FFE166C-7BEF-41C2-A50D-E10E585A6661}.Release|x86.ActiveCfg = Release|Any CPU
 		{1FFE166C-7BEF-41C2-A50D-E10E585A6661}.Release|x86.Build.0 = Release|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Debug|x64.Build.0 = Debug|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Debug|x86.Build.0 = Debug|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Release|x64.ActiveCfg = Release|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Release|x64.Build.0 = Release|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Release|x86.ActiveCfg = Release|Any CPU
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{91E97B18-2533-4AAD-8DB2-1AED38A1672F} = {D71EE6F6-1519-4F07-954E-5C501CF2A10C}
 		{8389A8DD-E66E-4289-8ABD-791D963CC5EA} = {D71EE6F6-1519-4F07-954E-5C501CF2A10C}
 		{1FFE166C-7BEF-41C2-A50D-E10E585A6661} = {D71EE6F6-1519-4F07-954E-5C501CF2A10C}
+		{B6914FA4-D1A6-4C32-B995-1A45D543C21B} = {D71EE6F6-1519-4F07-954E-5C501CF2A10C}
 	EndGlobalSection
 EndGlobal

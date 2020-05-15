@@ -1,6 +1,6 @@
 namespace DutchAndBold.MoneybirdSdk.Domain.Models
 {
-    public abstract class MoneybirdEntityBase
+    public abstract class MoneybirdEntityBase : IMoneybirdEntity
     {
     }
 }
