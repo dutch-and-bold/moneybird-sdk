@@ -6,23 +6,20 @@ using DutchAndBold.MoneybirdSdk.Contracts;
 using DutchAndBold.MoneybirdSdk.Domain.Models;
 using DutchAndBold.MoneybirdSdk.Domain.Query;
 using DutchAndBold.MoneybirdSdk.Domain.Repositories;
-using DutchAndBold.MoneybirdSdk.Extensions;
 
 namespace DutchAndBold.MoneybirdSdk.Repositories
 {
     public class MoneybirdRepositoryRead<TMoneybirdEntity, TMoneybirdQuery>
-        : IMoneybirdRepositoryRead<TMoneybirdEntity, TMoneybirdQuery>
+        : MoneybirdRepositoryBase, IMoneybirdRepositoryRead<TMoneybirdEntity, TMoneybirdQuery>
         where TMoneybirdEntity : IMoneybirdEntity
         where TMoneybirdQuery : IMoneybirdQuery
     {
-        private readonly string _apiPath;
-
-        private readonly IMoneybirdClient _moneybirdClient;
-
-        public MoneybirdRepositoryRead(string apiPath, IMoneybirdClient moneybirdClient)
+        public MoneybirdRepositoryRead(
+            IMoneybirdAdministrationAccessor administrationAccessor,
+            string apiPath,
+            IMoneybirdClient moneybirdClient)
+            : base(administrationAccessor, apiPath, moneybirdClient)
         {
-            _apiPath = apiPath;
-            _moneybirdClient = moneybirdClient;
         }
 
         public Task<IEnumerable<TMoneybirdEntity>> GetAsync(
@@ -32,8 +29,8 @@ namespace DutchAndBold.MoneybirdSdk.Repositories
             var query = Activator.CreateInstance<TMoneybirdQuery>();
             action?.Invoke(query);
 
-            return _moneybirdClient.GetAsync<IEnumerable<TMoneybirdEntity>>(
-                $"{_apiPath}{query.ToQueryString()}",
+            return Client.GetAsync<IEnumerable<TMoneybirdEntity>>(
+                GetApiPath(query),
                 cancellationToken);
         }
 
@@ -48,8 +45,11 @@ namespace DutchAndBold.MoneybirdSdk.Repositories
             IMoneybirdRepositoryRead<TMoneybirdEntity>
         where TMoneybirdEntity : IMoneybirdEntity
     {
-        public MoneybirdRepositoryRead(string apiPath, IMoneybirdClient moneybirdClient)
-            : base(apiPath, moneybirdClient)
+        public MoneybirdRepositoryRead(
+            IMoneybirdAdministrationAccessor administrationAccessor,
+            string apiPath,
+            IMoneybirdClient moneybirdClient)
+            : base(administrationAccessor, apiPath, moneybirdClient)
         {
         }
     }

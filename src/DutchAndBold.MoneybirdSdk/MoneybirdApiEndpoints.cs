@@ -1,6 +1,6 @@
 namespace DutchAndBold.MoneybirdSdk
 {
-    public static class MoneybirdApiEndpointV2
+    public static class MoneybirdApiEndpoints
     {
         public const string Administrations = "administrations";
 

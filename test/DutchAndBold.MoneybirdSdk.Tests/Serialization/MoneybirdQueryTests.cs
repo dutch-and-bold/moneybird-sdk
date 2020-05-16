@@ -19,5 +19,20 @@ namespace DutchAndBold.MoneybirdSdk.Tests.Serialization
             
             Assert.Equal("?page=2&per_page=45", queryString);
         }
+        
+        [Fact]
+        public void ItCreateAnCorrectQueryStringForContacts()
+        {
+            var query = new ContactQuery()
+            {
+                Page = 2,
+                PerPage = 45,
+                Query = "test"
+            };
+
+            var queryString = query.ToQueryString();
+            
+            Assert.Equal("?query=test&page=2&per_page=45", queryString);
+        }
     }
 }

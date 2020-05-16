@@ -1,6 +1,6 @@
 namespace DutchAndBold.MoneybirdSdk.Domain.Query
 {
-    public class ContactQuery
+    public class ContactQuery : MoneybirdQuery
     {
         public string Query { get; set; }
 

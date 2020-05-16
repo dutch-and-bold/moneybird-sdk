@@ -4,6 +4,7 @@
         <Title>Moneybird SDK</Title>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Description>Moneybird SDK for .NET and .NET Core</Description>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>

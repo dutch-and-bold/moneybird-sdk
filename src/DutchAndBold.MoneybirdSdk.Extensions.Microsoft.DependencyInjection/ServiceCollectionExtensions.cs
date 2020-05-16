@@ -23,7 +23,8 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
 
             services.AddScoped<IMoneybirdRepositoryRead<Administration>>(
                 s => new MoneybirdRepositoryRead<Administration>(
-                    MoneybirdApiEndpointV2.Administrations,
+                    null,
+                    MoneybirdApiEndpoints.Administrations,
                     s.GetService<IMoneybirdClient>()));
 
             return services;
