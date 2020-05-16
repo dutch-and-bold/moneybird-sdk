@@ -26,7 +26,7 @@ Moneybird SDK for .NET and .NET Core
 2. Use the extensions methods `AddMoneybirdSdk`, `AddFileTokenStore` and `AddMoneybirdMAchineToMachineAuthentication` on `IServiceCollection`. See example below.
 
 ```c#
-// This registers the Client, Token handlers and Repositorier.
+// This registers the Client, token handlers and repositories.
 services
     .AddMoneybirdSdk(apiConfiguration.EndpointUrl)
     .AddFileTokenStore(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "token.json"); // Alternatively use AddInMemoryTokenStore()
@@ -47,7 +47,7 @@ if (apiConfiguration.ClientId != null && apiConfiguration.ClientSecret != null)
 
 ** Usage instructions are still under maintenance and will get updated as the project progresses.
 
-Access to the api happens through so called repositories. There are several type of repositories, for reading, writing, updating and deleting.
+Access to the api happens through so called repositories. There are several type of repositories. Either for reading, writing, updating and deleting.
 
 ### (Example) Retrieving administrations
 
@@ -165,8 +165,8 @@ When releasing a new version we can create a release branch using nbgv.
 
 * Run `nbgv prepare-release`.
 * This has now created a new release/v1.* branch.
-* Pushing this branch will trigger the package publish workflow with a stable version number (eg: 1.0.*).
-* Pushing to the master branch will trigger the package publish workflow with an new feature alpha version number (eg: 1.1.*-alpha).
+* Pushing the release branch will trigger the package publish workflow with a stable version number (eg: 1.0.*).
+* Pushing to the master branch will now trigger the package publish workflow with an new feature alpha version number (eg: 1.1.*-alpha).
 
 ** Please note that commits are automatically tagged by the publish workflow. Except for non-public releases.
 
