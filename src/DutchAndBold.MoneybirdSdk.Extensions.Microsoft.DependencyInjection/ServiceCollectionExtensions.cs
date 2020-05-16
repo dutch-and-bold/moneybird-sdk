@@ -21,7 +21,11 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
                 .AddHttpMessageHandler<OAuthHeaderHandler>()
                 .AddTypedClient<IMoneybirdClient, MoneybirdClient>();
 
-            services.AddScoped<IMoneybirdRepositoryRead<Administration>, AdministrationRepository>();
+            services.AddScoped<IMoneybirdRepositoryRead<Administration>>(
+                s => new MoneybirdRepositoryRead<Administration>(
+                    null,
+                    MoneybirdApiEndpoints.Administrations,
+                    s.GetService<IMoneybirdClient>()));
 
             return services;
         }

@@ -7,9 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-        <PackageReference Include="Moq" Version="4.14.1" />
         <PackageReference Include="xunit" Version="2.4.0" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
         <PackageReference Include="coverlet.collector" Version="1.2.0" />
@@ -17,16 +15,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\DutchAndBold.MoneybirdSdk.Domain\DutchAndBold.MoneybirdSdk.Domain.csproj" />
-      <ProjectReference Include="..\..\src\DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection\DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="Resources\ApiResponses\administration.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Resources\ApiResponses\contact.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 
 </Project>

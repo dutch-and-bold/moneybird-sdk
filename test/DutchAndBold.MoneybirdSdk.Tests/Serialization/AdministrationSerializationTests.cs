@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using DutchAndBold.MoneybirdSdk.Domain.Models.AdministrationAggregate;
+using DutchAndBold.MoneybirdSdk.Extensions;
 using TimeZoneConverter;
 using Xunit;
 
@@ -12,7 +13,7 @@ namespace DutchAndBold.MoneybirdSdk.Tests.Serialization
     public class AdministrationSerializationTests
     {
         [Fact]
-        public void ItCanDeserializeAdministrationApiResponseWithIanaTimeZone()
+        public void ItCanDeserializeAdministrationApiResponse()
         {
             var responseString = File.ReadAllText("Resources/ApiResponses/administration.json");
 

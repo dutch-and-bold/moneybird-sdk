@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using DutchAndBold.MoneybirdSdk.Contracts;
+using DutchAndBold.MoneybirdSdk.Extensions;
 
 namespace DutchAndBold.MoneybirdSdk
 {

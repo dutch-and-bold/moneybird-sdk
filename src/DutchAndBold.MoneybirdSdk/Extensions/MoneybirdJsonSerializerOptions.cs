@@ -1,8 +1,9 @@
 using System;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using DutchAndBold.MoneybirdSdk.Serialization;
 
-namespace DutchAndBold.MoneybirdSdk
+namespace DutchAndBold.MoneybirdSdk.Extensions
 {
     public static class MoneybirdJsonSerializerOptions
     {
@@ -13,9 +14,11 @@ namespace DutchAndBold.MoneybirdSdk
                 throw new ArgumentNullException(nameof(jsonSerializerOptions));
             }
 
+            jsonSerializerOptions.PropertyNamingPolicy = new JsonSnakeCaseNamingPolicy();
+
+            jsonSerializerOptions.Converters.Add(new JsonStringEnumMemberConverter(JsonNamingPolicy.CamelCase, false));
             jsonSerializerOptions.Converters.Add(new JsonTimeZoneConverter());
             jsonSerializerOptions.Converters.Add(new JsonCurrencyConverter());
-            jsonSerializerOptions.PropertyNamingPolicy = new JsonSnakeCaseNamingPolicy();
 
             return jsonSerializerOptions;
         }
