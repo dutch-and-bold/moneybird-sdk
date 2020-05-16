@@ -3,6 +3,7 @@
  # Moneybird SDK
  
  ![.NET Standard](https://img.shields.io/badge/.NET%20Standard-2.1-purple)
+ [![Nuget Version](https://img.shields.io/nuget/vpre/DutchAndBold.MoneybirdSdk?color=%23337ab7)](https://www.nuget.org/packages/DutchAndBold.MoneybirdSdk/1.0.13-alpha)
 
 Moneybird SDK for .NET and .NET Core
 
@@ -11,48 +12,56 @@ Moneybird SDK for .NET and .NET Core
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project structure](#project-structure)
+- [API implementation progress](#api-implementation-progress)
 - [Support](#support)
 - [Contributing](#contributing)
 
 ## Installation
 
-Not yet available.
+** Installation instructions are still under maintenance and will get updated as the project progresses.
+
+### Configure with Microsoft dependency injection (ASP.NET)
+
+1. Install `DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection` with [Nuget](https://www.nuget.org/packages/DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection)
+2. Use the extensions methods `AddMoneybirdSdk`, `AddFileTokenStore` and `AddMoneybirdMAchineToMachineAuthentication` on `IServiceCollection`. See example below.
+
+```c#
+// This registers the Client, Token handlers and Repositorier.
+services
+    .AddMoneybirdSdk(apiConfiguration.EndpointUrl)
+    .AddFileTokenStore(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "token.json"); // Alternatively use AddInMemoryTokenStore()
+
+// The authentication module is only required for retrieving a new token.
+// If a token is already present the step below is not required.
+
+if (apiConfiguration.ClientId != null && apiConfiguration.ClientSecret != null)
+{
+    services.AddMoneybirdMachineToMachineAuthentication(
+        apiConfiguration.AuthorityUrl,
+        apiConfiguration.ClientId,
+        apiConfiguration.ClientSecret);
+}
+```
 
 ## Usage
 
-Not yet available.
+** Usage instructions are still under maintenance and will get updated as the project progresses.
 
-## API Implementation Progress
+Access to the api happens through so called repositories. There are several type of repositories, for reading, writing, updating and deleting.
 
-| Resource                               | Status      |
-| -------------------------------------- | ----------- |
-| Administration                         | ✅          |
-| Contacts                               | In progress |
-| Custom fields                          | Planned     |
-| Document styles                        | Planned     |
-| Documents: General documents           | Planned     |
-| Documents: General journal documents   | Planned     |
-| Documents: Purchase invoices           | Planned     |
-| Documents: Receipts                    | Planned     |
-| Documents: Typeless documents          | Planned     |
-| Estimates                              | Planned     |
-| External sales invoices                | Planned     |
-| Financial accounts                     | Planned     |
-| Financial mutations                    | Planned     |
-| Financial statements                   | Planned     |
-| Identities                             | Planned     |
-| Import mappings                        | Planned     |
-| Ledger accounts                        | Planned     |
-| Products                               | Planned     |
-| Projects                               | Planned     |
-| Recurring sales invoices               | Planned     |
-| Sales invoices                         | Planned     |
-| Tax rates                              | Planned     |
-| Verifications                          | Planned     |
-| Webhooks                               | Planned     |
-| Workflows                              | Planned     |
+### (Example) Retrieving administrations
 
-More information about resources can be found [here](https://developer.moneybird.com/api/administration/)
+```c#
+public async Task ExampleMethodRetrieveAdministrations(
+    IMoneybirdRepositoryRead<Administration> administrationRepository,
+    CancellationToken cancellationToken)
+{
+    var administrations = await _administrationRepository.GetAsync(cancellationToken);
+    administrations.ToList().ForEach(a => Console.WriteLine(a.Name));
+}
+```
+
+For more examples please take a look at the unit tests or take a look at the [Moneybird CLI](https://github.com/dutch-and-bold/moneybird-cli) project.
 
 ## Project structure
 
@@ -88,6 +97,39 @@ This project contains the 'domain' of Moneybird. Consisting of entities and repo
 ```
 
 This directory contains base setup configuration for Microsoft's dependency injection API.
+
+
+## API implementation progress
+
+| Resource                               | Read           |
+| -------------------------------------- | -------------- |
+| Administration                         | ✅             |
+| Contacts                               | ✅ Read only   |
+| Custom fields                          | Planned        |
+| Document styles                        | Planned        |
+| Documents: General documents           | Planned        |
+| Documents: General journal documents   | Planned        |
+| Documents: Purchase invoices           | Planned        |
+| Documents: Receipts                    | Planned        |
+| Documents: Typeless documents          | Planned        |
+| Estimates                              | Planned        |
+| External sales invoices                | Planned        |
+| Financial accounts                     | Planned        |
+| Financial mutations                    | Planned        |
+| Financial statements                   | Planned        |
+| Identities                             | Planned        |
+| Import mappings                        | Planned        |
+| Ledger accounts                        | Planned        |
+| Products                               | Planned        |
+| Projects                               | Planned        |
+| Recurring sales invoices               | Planned        |
+| Sales invoices                         | Planned        |
+| Tax rates                              | Planned        |
+| Verifications                          | Planned        |
+| Webhooks                               | Planned        |
+| Workflows                              | Planned        |
+
+More information about resources can be found [here](https://developer.moneybird.com/api/administration/)
 
 ## Support
 
