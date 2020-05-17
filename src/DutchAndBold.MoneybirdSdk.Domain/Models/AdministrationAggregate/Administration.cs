@@ -6,11 +6,6 @@ namespace DutchAndBold.MoneybirdSdk.Domain.Models.AdministrationAggregate
     public class Administration : MoneybirdEntityBase
     {
         /// <summary>
-        /// Administration id.
-        /// </summary>
-        public string Id { get; set; }
-
-        /// <summary>
         /// Administration name.
         /// </summary>
         public string Name { get; set; }

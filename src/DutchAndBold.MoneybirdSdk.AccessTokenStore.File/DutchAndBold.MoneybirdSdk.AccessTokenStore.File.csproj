@@ -4,6 +4,7 @@
         <Title>Moneybird SDK</Title>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Description>Access Token Store using System.IO.File</Description>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
     
     <ItemGroup>

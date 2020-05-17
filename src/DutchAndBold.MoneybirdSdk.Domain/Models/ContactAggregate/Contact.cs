@@ -5,10 +5,8 @@ using DutchAndBold.MoneybirdSdk.Domain.Models.EventAggregate;
 
 namespace DutchAndBold.MoneybirdSdk.Domain.Models.ContactAggregate
 {
-    public class Contact
+    public class Contact : MoneybirdEntityBase
     {
-        public string Id { get; set; }
-
         public string AdministrationId { get; set; }
 
         public string CompanyName { get; set; }

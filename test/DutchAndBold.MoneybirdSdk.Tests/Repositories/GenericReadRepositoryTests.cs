@@ -18,10 +18,15 @@ namespace DutchAndBold.MoneybirdSdk.Tests.Repositories
             client.Setup(o => o.GetAsync<IEnumerable<Administration>>("v2/administrations?page=1&per_page=50", default))
                 .ReturnsAsync(new List<Administration>())
                 .Verifiable();
+            
+            client.Setup(o => o.GetAsync<IEnumerable<Administration>>("v2/administrations?page=2&per_page=50", default))
+                .ReturnsAsync(new List<Administration>())
+                .Verifiable();
 
-            var repository = new MoneybirdRepositoryRead<Administration>(null, "administrations", client.Object);
+            var repository = new MoneybirdRepositoryRead<Administration>("administrations", client.Object);
 
             await repository.GetAsync();
+            await repository.GetAsync(o => o.Page = 2);
 
             client.Verify();
         }
@@ -40,7 +45,7 @@ namespace DutchAndBold.MoneybirdSdk.Tests.Repositories
                 .ReturnsAsync(new List<Administration>())
                 .Verifiable();
 
-            var repository = new MoneybirdRepositoryRead<Administration>(administrationAccessor.Object, "contacts", client.Object);
+            var repository = new MoneybirdRepositoryRead<Administration>("contacts", client.Object, administrationAccessor.Object);
 
             await repository.GetAsync();
 

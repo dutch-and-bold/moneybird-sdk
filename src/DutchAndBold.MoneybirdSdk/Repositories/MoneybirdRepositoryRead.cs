@@ -14,14 +14,21 @@ namespace DutchAndBold.MoneybirdSdk.Repositories
         where TMoneybirdEntity : IMoneybirdEntity
         where TMoneybirdQuery : IMoneybirdQuery
     {
+        /// <inheritdoc cref="MoneybirdRepositoryBase"/>
         public MoneybirdRepositoryRead(
-            IMoneybirdAdministrationAccessor administrationAccessor,
             string apiPath,
-            IMoneybirdClient moneybirdClient)
-            : base(administrationAccessor, apiPath, moneybirdClient)
+            IMoneybirdClient moneybirdClient,
+            IMoneybirdAdministrationAccessor administrationAccessor = default)
+            : base(apiPath, moneybirdClient, administrationAccessor)
         {
         }
 
+        /// <summary>
+        /// Retrieves entities from the API using an HTTP connection.
+        /// </summary>
+        /// <param name="action">Is given an empty <see cref="TMoneybirdQuery"/>.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IEnumerable<TMoneybirdEntity>> GetAsync(
             Action<TMoneybirdQuery> action,
             CancellationToken cancellationToken = default)
@@ -34,6 +41,11 @@ namespace DutchAndBold.MoneybirdSdk.Repositories
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Retrieves entities from the API using an HTTP connection.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IEnumerable<TMoneybirdEntity>> GetAsync(CancellationToken cancellationToken = default)
         {
             return GetAsync(default, cancellationToken);
@@ -45,11 +57,12 @@ namespace DutchAndBold.MoneybirdSdk.Repositories
             IMoneybirdRepositoryRead<TMoneybirdEntity>
         where TMoneybirdEntity : IMoneybirdEntity
     {
+        /// <inheritdoc cref="MoneybirdRepositoryBase"/>
         public MoneybirdRepositoryRead(
-            IMoneybirdAdministrationAccessor administrationAccessor,
             string apiPath,
-            IMoneybirdClient moneybirdClient)
-            : base(administrationAccessor, apiPath, moneybirdClient)
+            IMoneybirdClient moneybirdClient,
+            IMoneybirdAdministrationAccessor administrationAccessor = default)
+            : base(apiPath, moneybirdClient, administrationAccessor)
         {
         }
     }
