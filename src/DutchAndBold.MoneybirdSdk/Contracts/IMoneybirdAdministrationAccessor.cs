@@ -5,6 +5,6 @@ namespace DutchAndBold.MoneybirdSdk.Contracts
         /// <summary>
         /// Gets the entity Id.
         /// </summary>
-        public string? Id { get; }
+        public string? Id { get; set; }
     }
 }

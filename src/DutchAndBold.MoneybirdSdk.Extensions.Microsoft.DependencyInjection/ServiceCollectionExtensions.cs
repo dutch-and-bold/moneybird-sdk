@@ -2,7 +2,9 @@ using System;
 using System.IO.Abstractions;
 using DutchAndBold.MoneybirdSdk.AccessTokenStore.File;
 using DutchAndBold.MoneybirdSdk.Contracts;
+using DutchAndBold.MoneybirdSdk.Domain.Models;
 using DutchAndBold.MoneybirdSdk.Domain.Models.AdministrationAggregate;
+using DutchAndBold.MoneybirdSdk.Domain.Models.ContactAggregate;
 using DutchAndBold.MoneybirdSdk.Domain.Repositories;
 using DutchAndBold.MoneybirdSdk.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +15,8 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
     {
         public static IServiceCollection AddMoneybirdSdk(
             this IServiceCollection services,
-            Uri moneybirdApiBaseUri)
+            Uri moneybirdApiBaseUri,
+            string? administrationId = null)
         {
             services.AddTransient<OAuthHeaderHandler>();
 
@@ -25,6 +28,8 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
                 s => new MoneybirdRepositoryRead<Administration>(
                     MoneybirdApiEndpoints.Administrations,
                     s.GetService<IMoneybirdClient>()));
+
+            services.AddMoneybirdRepositories(administrationId);
 
             return services;
         }
@@ -60,6 +65,50 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
             services.AddSingleton(s => new FileAccessTokenStore(s.GetService<IFile>(), fileLocation));
             services.AddSingleton<IAccessTokenAccessor>(s => s.GetService<FileAccessTokenStore>());
             services.AddSingleton<IAccessTokenStore>(s => s.GetService<FileAccessTokenStore>());
+
+            return services;
+        }
+
+        private static IServiceCollection AddMoneybirdRepositories(
+            this IServiceCollection services,
+            string? administrationId = null)
+        {
+            services.AddScoped<IMoneybirdAdministrationAccessor>(
+                s => new AdministrationAccessor()
+                {
+                    Id = administrationId
+                });
+
+            services.AddReadWriteUpdateDeleteRepository<Contact>("contacts", "contact");
+            return services;
+        }
+
+        /// <summary>
+        /// Adds repositories for read, write, update and delete.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="apiPath">Api endpoint path (eg: contacts).</param>
+        /// <param name="objectKey">Api post body document key (eg: contact).</param>
+        /// <typeparam name="TMoneybirdEntity"></typeparam>
+        /// <returns></returns>
+        private static IServiceCollection AddReadWriteUpdateDeleteRepository<TMoneybirdEntity>(
+            this IServiceCollection services,
+            string apiPath,
+            string objectKey)
+            where TMoneybirdEntity : class, IMoneybirdEntity
+        {
+            services.AddScoped<IMoneybirdRepositoryRead<TMoneybirdEntity>>(
+                s => new MoneybirdRepositoryRead<TMoneybirdEntity>(
+                    apiPath,
+                    s.GetService<IMoneybirdClient>(),
+                    s.GetService<IMoneybirdAdministrationAccessor>()));
+
+            services.AddScoped<IMoneybirdRepositoryStore<TMoneybirdEntity>>(
+                s => new MoneybirdRepositoryStore<TMoneybirdEntity>(
+                    apiPath,
+                    objectKey,
+                    s.GetService<IMoneybirdClient>(),
+                    s.GetService<IMoneybirdAdministrationAccessor>()));
 
             return services;
         }

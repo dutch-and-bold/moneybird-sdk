@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -50,14 +50,21 @@ namespace DutchAndBold.MoneybirdSdk.Repositories
             TMoneybirdEntity entity,
             CancellationToken cancellationToken = default)
         {
-            var serialized = JsonSerializer.Serialize(entity, new JsonSerializerOptions().Moneybird());
+            var dictionary = new Dictionary<string, TMoneybirdEntity>
+            {
+                {
+                    _objectKey, entity
+                }
+            };
 
-            using var body = new StringContent(
-                $"{{\"{_objectKey}\":\"{serialized}\"}}",
-                Encoding.UTF8,
-                "application/json");
+            using var body = new JsonContent<Dictionary<string, TMoneybirdEntity>>(
+                dictionary,
+                new JsonSerializerOptions().Moneybird());
 
-            return await Client.PostAsync<TMoneybirdEntity>(GetApiPath(entity), body, cancellationToken);
+            return await Client.PostAsync<TMoneybirdEntity>(
+                GetApiPath(entity),
+                body,
+                cancellationToken);
         }
     }
 }
