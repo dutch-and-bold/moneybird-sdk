@@ -27,6 +27,7 @@ Moneybird SDK for .NET and .NET Core
 
 ```c#
 // This registers the Client, token handlers and repositories.
+
 services
     .AddMoneybirdSdk(apiConfiguration.EndpointUrl)
     .AddFileTokenStore(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "token.json"); // Alternatively use AddInMemoryTokenStore()
@@ -61,7 +62,7 @@ public async Task ExampleMethodRetrieveAdministrations(
 }
 ```
 
-For more examples please take a look at the unit tests or take a look at the [Moneybird CLI](https://github.com/dutch-and-bold/moneybird-cli) project.
+For more examples please take a look at some of the unit tests or take a look at the [Moneybird CLI](https://github.com/dutch-and-bold/moneybird-cli) project.
 
 ## Project structure
 
