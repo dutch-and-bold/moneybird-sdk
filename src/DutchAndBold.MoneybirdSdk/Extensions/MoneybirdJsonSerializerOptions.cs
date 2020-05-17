@@ -7,6 +7,12 @@ namespace DutchAndBold.MoneybirdSdk.Extensions
 {
     public static class MoneybirdJsonSerializerOptions
     {
+        /// <summary>
+        /// Applies configuration for Moneybird (de)serialization.
+        /// </summary>
+        /// <param name="jsonSerializerOptions"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static JsonSerializerOptions Moneybird(this JsonSerializerOptions jsonSerializerOptions)
         {
             if (jsonSerializerOptions == null)

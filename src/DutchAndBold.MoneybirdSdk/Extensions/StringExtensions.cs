@@ -5,6 +5,11 @@ namespace DutchAndBold.MoneybirdSdk.Extensions
 {
     internal static class StringExtensions
     {
+        /// <summary>
+        /// Converts string from 'PascalCase' to 'snake_case'.
+        /// </summary>
+        /// <param name="pascalCaseString">String in 'PascalCase'</param>
+        /// <returns></returns>
         [SuppressMessage("ReSharper", "CA1308")]
         public static string PascalToSnakeCase(this string pascalCaseString)
         {

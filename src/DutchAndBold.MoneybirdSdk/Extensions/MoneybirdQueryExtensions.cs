@@ -6,6 +6,12 @@ namespace DutchAndBold.MoneybirdSdk.Extensions
 {
     public static class MoneybirdQueryExtensions
     {
+        /// <summary>
+        /// Stringifies an <see cref="IMoneybirdQuery"/>.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Throws when query is null.</exception>
         public static string ToQueryString(this IMoneybirdQuery query)
         {
             if (query == null)
