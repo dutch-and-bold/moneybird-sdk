@@ -41,5 +41,22 @@ namespace DutchAndBold.MoneybirdSdk.Tests.Authentication
                     "https://wubbalubbadubdub.m999/oauth/authorize?client_id=clientId&redirect_uri=monogatron:lovefinderrz&response_type=code"),
                 oAuthClient.GetAuthenticationUrl());
         }
+        
+        [Fact]
+        public void ItCanAddScopesToTheQuery()
+        {
+            var httpMessageHandler = new Mock<HttpMessageHandler>();
+            using var client = new HttpClient(httpMessageHandler.Object)
+            {
+                BaseAddress = new Uri("https://wubbalubbadubdub.m999/oauth/")
+            };
+
+            var oAuthClient = new OAuth2Client(client, "clientId", "clientSecret", new Uri("monogatron:lovefinderrz"));
+
+            Assert.Equal(
+                new Uri(
+                    "https://wubbalubbadubdub.m999/oauth/authorize?client_id=clientId&redirect_uri=monogatron:lovefinderrz&response_type=code&scope=bank documents sales_invoices"),
+                oAuthClient.GetAuthenticationUrl(new []{MoneybirdOAuthScope.Bank, MoneybirdOAuthScope.Documents, MoneybirdOAuthScope.SalesInvoices}));
+        }
     }
 }

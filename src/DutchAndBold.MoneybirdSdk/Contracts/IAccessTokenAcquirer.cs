@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using DutchAndBold.MoneybirdSdk.Authentication;
 using DutchAndBold.MoneybirdSdk.Models;
 
 namespace DutchAndBold.MoneybirdSdk.Contracts
@@ -25,6 +27,6 @@ namespace DutchAndBold.MoneybirdSdk.Contracts
         /// * M2M: Given an string authentication code they can paste somewhere in your application.
         /// </summary>
         /// <returns>The uri for the end user.</returns>
-        public Uri GetAuthenticationUrl();
+        public Uri GetAuthenticationUrl(IEnumerable<MoneybirdOAuthScope> scopes = default);
     }
 }

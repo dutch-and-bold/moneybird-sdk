@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using DutchAndBold.MoneybirdSdk.Contracts;
+using DutchAndBold.MoneybirdSdk.Extensions;
 using DutchAndBold.MoneybirdSdk.Models;
 
 namespace DutchAndBold.MoneybirdSdk.Authentication
@@ -60,11 +63,13 @@ namespace DutchAndBold.MoneybirdSdk.Authentication
         }
 
         /// <inheritdoc cref="IAccessTokenAcquirer"/>
-        public Uri GetAuthenticationUrl()
+        public Uri GetAuthenticationUrl(IEnumerable<MoneybirdOAuthScope> scopes = default)
         {
+            var scopeString = string.Join(' ', scopes?.Select(o => o.ToString().PascalToSnakeCase()));
+
             return new Uri(
                 _httpClient.BaseAddress,
-                $"authorize?client_id={_clientId}&redirect_uri={_redirectTo}&response_type=code");
+                $"authorize?client_id={_clientId}&redirect_uri={_redirectTo}&response_type=code&scope={scopeString}");
         }
 
         private async Task<AccessToken> MakeAccessTokenRequest(

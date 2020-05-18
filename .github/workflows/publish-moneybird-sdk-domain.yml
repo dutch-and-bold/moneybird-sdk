@@ -28,4 +28,4 @@ jobs:
           NUGET_KEY: ${{secrets.API_KEY_NUGET}}
           INCLUDE_SYMBOLS: true
           TAG_COMMIT: ${{ steps.nbgv.outputs.publicRelease == 'True' }}
-          TAG_FORMAT: v*
+          TAG_FORMAT: v*-domain
