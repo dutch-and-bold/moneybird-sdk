@@ -65,11 +65,21 @@ namespace DutchAndBold.MoneybirdSdk.Authentication
         /// <inheritdoc cref="IAccessTokenAcquirer"/>
         public Uri GetAuthenticationUrl(IEnumerable<MoneybirdOAuthScope> scopes = default)
         {
-            var scopeString = string.Join(' ', scopes?.Select(o => o.ToString().PascalToSnakeCase()));
+            var scopeString = "";
+
+            scopes = scopes?.ToList();
+
+            if (scopes != null && scopes.Any())
+            {
+                scopeString = "&scope=" +
+                              string.Join(
+                                  ' ',
+                                  scopes.Select(o => o.ToString().PascalToSnakeCase()));
+            }
 
             return new Uri(
                 _httpClient.BaseAddress,
-                $"authorize?client_id={_clientId}&redirect_uri={_redirectTo}&response_type=code&scope={scopeString}");
+                $"authorize?client_id={_clientId}&redirect_uri={_redirectTo}&response_type=code{scopeString}");
         }
 
         private async Task<AccessToken> MakeAccessTokenRequest(

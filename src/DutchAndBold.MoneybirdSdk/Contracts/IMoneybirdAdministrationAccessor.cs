@@ -1,3 +1,4 @@
+#nullable enable
 namespace DutchAndBold.MoneybirdSdk.Contracts
 {
     public interface IMoneybirdAdministrationAccessor

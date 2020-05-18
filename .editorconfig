@@ -1,3 +1,5 @@
 [*.cs]
 dotnet_diagnostic.CA2007.severity = none
 dotnet_diagnostic.CA1303.severity = none
+dotnet_diagnostic.CA1040.severity = none
+dotnet_diagnostic.CA2227.severity = none

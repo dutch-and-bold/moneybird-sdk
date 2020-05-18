@@ -1,3 +1,4 @@
+#nullable enable
 using DutchAndBold.MoneybirdSdk.Contracts;
 
 namespace DutchAndBold.MoneybirdSdk
