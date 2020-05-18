@@ -1,9 +1,8 @@
 using DutchAndBold.MoneybirdSdk.Contracts;
-using DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace MoneybirdSdk.Extensions.Microsoft.DependencyInjection.Tests
+namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection.Tests
 {
     public class AccessTokenStoreIoCTests
     {

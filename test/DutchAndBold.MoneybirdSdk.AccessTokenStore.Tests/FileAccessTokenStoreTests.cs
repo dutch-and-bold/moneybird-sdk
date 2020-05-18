@@ -4,7 +4,7 @@ using DutchAndBold.MoneybirdSdk.AccessTokenStore.File;
 using Moq;
 using Xunit;
 
-namespace MoneybirdSdk.Client.AccessTokenStore.Tests
+namespace DutchAndBold.MoneybirdSdk.AccessTokenStore.Tests
 {
     public class FileAccessTokenStoreTests
     {

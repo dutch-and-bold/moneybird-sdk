@@ -1,13 +1,11 @@
 using System;
 using System.Net.Http;
 using System.Reflection;
-using DutchAndBold.MoneybirdSdk;
 using DutchAndBold.MoneybirdSdk.Contracts;
-using DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace MoneybirdSdk.Extensions.Microsoft.DependencyInjection.Tests
+namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection.Tests
 {
     public class AccessTokenAcquirerIoCTests
     {
