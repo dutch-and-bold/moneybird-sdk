@@ -1,6 +1,7 @@
 using System;
 using System.IO.Abstractions;
 using DutchAndBold.MoneybirdSdk.AccessTokenStore.File;
+using DutchAndBold.MoneybirdSdk.Authentication;
 using DutchAndBold.MoneybirdSdk.Contracts;
 using DutchAndBold.MoneybirdSdk.Domain.Models;
 using DutchAndBold.MoneybirdSdk.Domain.Models.AdministrationAggregate;
@@ -40,11 +41,25 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
             string clientId,
             string clientSecret)
         {
+            return services.AddMoneybirdAuthentication(
+                authority,
+                clientId,
+                clientSecret,
+                new Uri("urn:ietf:wg:oauth:2.0:oob"));
+        }
+
+        public static IServiceCollection AddMoneybirdAuthentication(
+            this IServiceCollection services,
+            Uri authority,
+            string clientId,
+            string clientSecret,
+            Uri redirectUri)
+        {
             services.AddHttpClient("moneybird.authority", c => c.BaseAddress = authority)
                 .AddTypedClient<IAccessTokenRefresher>(
-                    (c, s) => new MachineToMachineOAuth2Client(c, clientId, clientSecret))
+                    (c, s) => new OAuth2Client(c, clientId, clientSecret, redirectUri))
                 .AddTypedClient<IAccessTokenAcquirer>(
-                    (c, s) => new MachineToMachineOAuth2Client(c, clientId, clientSecret));
+                    (c, s) => new OAuth2Client(c, clientId, clientSecret, redirectUri));
 
             return services;
         }

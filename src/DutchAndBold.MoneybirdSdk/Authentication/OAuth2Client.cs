@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -6,26 +7,34 @@ using System.Threading.Tasks;
 using DutchAndBold.MoneybirdSdk.Contracts;
 using DutchAndBold.MoneybirdSdk.Models;
 
-namespace DutchAndBold.MoneybirdSdk
+namespace DutchAndBold.MoneybirdSdk.Authentication
 {
-    public class MachineToMachineOAuth2Client : IAccessTokenAcquirer, IAccessTokenRefresher
+    public class OAuth2Client : IAccessTokenAcquirer, IAccessTokenRefresher
     {
         private readonly HttpClient _httpClient;
+
         private readonly string _clientId;
+
         private readonly string _clientSecret;
+
+        private readonly Uri _redirectTo;
+
         private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions();
 
-        public MachineToMachineOAuth2Client(
+        public OAuth2Client(
             HttpClient httpClient,
             string clientId,
-            string clientSecret)
+            string clientSecret,
+            Uri redirectUri)
         {
             _httpClient = httpClient;
             _clientId = clientId;
             _clientSecret = clientSecret;
+            _redirectTo = redirectUri;
             _jsonSerializerOptions.PropertyNamingPolicy = new JsonSnakeCaseNamingPolicy();
         }
 
+        /// <inheritdoc cref="IAccessTokenAcquirer"/>
         public Task<AccessToken> AcquireAccessTokenAsync(
             string authorizationCode,
             CancellationToken cancellationToken = default)
@@ -34,11 +43,12 @@ namespace DutchAndBold.MoneybirdSdk
                 $"client_id={_clientId}" +
                 $"&client_secret={_clientSecret}" +
                 $"&code={authorizationCode}" +
-                "&redirect_uri=urn:ietf:wg:oauth:2.0:oob" +
+                $"&redirect_uri={_redirectTo}" +
                 "&grant_type=authorization_code",
                 cancellationToken);
         }
 
+        /// <inheritdoc cref="IAccessTokenRefresher"/>
         public Task<AccessToken> RefreshAccessToken(string refreshToken, CancellationToken cancellationToken = default)
         {
             return MakeAccessTokenRequest(
@@ -47,6 +57,14 @@ namespace DutchAndBold.MoneybirdSdk
                 $"&refresh_token={refreshToken}" +
                 "&grant_type=refresh_token",
                 cancellationToken);
+        }
+
+        /// <inheritdoc cref="IAccessTokenAcquirer"/>
+        public Uri GetAuthenticationUrl()
+        {
+            return new Uri(
+                _httpClient.BaseAddress,
+                $"authorize?client_id={_clientId}&redirect_uri={_redirectTo}&response_type=code");
         }
 
         private async Task<AccessToken> MakeAccessTokenRequest(

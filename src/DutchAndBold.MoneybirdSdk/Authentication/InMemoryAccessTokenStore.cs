@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using DutchAndBold.MoneybirdSdk.Contracts;
 using DutchAndBold.MoneybirdSdk.Models;
 
-namespace DutchAndBold.MoneybirdSdk
+namespace DutchAndBold.MoneybirdSdk.Authentication
 {
     public class InMemoryAccessTokenStore : IAccessTokenAccessor, IAccessTokenStore
     {

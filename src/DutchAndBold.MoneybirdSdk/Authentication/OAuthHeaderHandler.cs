@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DutchAndBold.MoneybirdSdk.Contracts;
 
-namespace DutchAndBold.MoneybirdSdk
+namespace DutchAndBold.MoneybirdSdk.Authentication
 {
     public class OAuthHeaderHandler : DelegatingHandler
     {

@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Reflection;
+using DutchAndBold.MoneybirdSdk.Authentication;
 using DutchAndBold.MoneybirdSdk.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -25,10 +26,10 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection.Tes
 
             var accessTokenAcquirer = serviceProvider.GetService<IAccessTokenAcquirer>();
 
-            Assert.IsType<MachineToMachineOAuth2Client>(accessTokenAcquirer);
+            Assert.IsType<OAuth2Client>(accessTokenAcquirer);
 
             var clientField =
-                typeof(MachineToMachineOAuth2Client).GetField("_httpClient", BindingFlags.NonPublic | BindingFlags.Instance);
+                typeof(OAuth2Client).GetField("_httpClient", BindingFlags.NonPublic | BindingFlags.Instance);
 
             var client = (HttpClient)clientField.GetValue(accessTokenAcquirer);
 
