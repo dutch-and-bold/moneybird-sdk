@@ -105,7 +105,7 @@ This directory contains base setup configuration for Microsoft's dependency inje
 | Resource                               | Read           |
 | -------------------------------------- | -------------- |
 | Administration                         | ✅             |
-| Contacts                               | ✅ Read only   |
+| Contacts                               | ✅             |
 | Custom fields                          | Planned        |
 | Document styles                        | Planned        |
 | Documents: General documents           | Planned        |
