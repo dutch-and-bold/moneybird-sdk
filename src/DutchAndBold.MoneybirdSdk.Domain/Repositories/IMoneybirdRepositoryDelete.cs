@@ -5,20 +5,18 @@ using DutchAndBold.MoneybirdSdk.Domain.Models;
 namespace DutchAndBold.MoneybirdSdk.Domain.Repositories
 {
     /// <summary>
-    /// Moneybird Repository interface for storing new entities.
+    /// Moneybird repository for deletes.
     /// </summary>
     /// <typeparam name="TMoneybirdEntity"></typeparam>
-    public interface IMoneybirdRepositoryStore<TMoneybirdEntity>
+    public interface IMoneybirdRepositoryDelete<TMoneybirdEntity>
         where TMoneybirdEntity : IMoneybirdEntity
     {
         /// <summary>
-        /// Stores a new entity.
+        /// Deletes one entity.
         /// </summary>
-        /// <param name="entity">New entity to store.</param>
+        /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<TMoneybirdEntity> StoreAsync(
-            TMoneybirdEntity entity,
-            CancellationToken cancellationToken = default);
+        public Task DeleteAsync(TMoneybirdEntity entity, CancellationToken cancellationToken = default);
     }
 }

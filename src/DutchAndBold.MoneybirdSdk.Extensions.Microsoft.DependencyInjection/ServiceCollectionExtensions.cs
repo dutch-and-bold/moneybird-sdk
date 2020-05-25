@@ -9,6 +9,7 @@ using DutchAndBold.MoneybirdSdk.Domain.Models.AdministrationAggregate;
 using DutchAndBold.MoneybirdSdk.Domain.Models.ContactAggregate;
 using DutchAndBold.MoneybirdSdk.Domain.Repositories;
 using DutchAndBold.MoneybirdSdk.Repositories;
+using Humanizer;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
@@ -95,32 +96,38 @@ namespace DutchAndBold.MoneybirdSdk.Extensions.Microsoft.DependencyInjection
                     Id = administrationId
                 });
 
-            services.AddReadWriteUpdateDeleteRepository<Contact>("contacts", "contact");
+            services.AddCreateReadUpdateDeleteRepository<Contact>(MoneybirdApiEndpoints.Contacts);
+
             return services;
         }
 
         /// <summary>
-        /// Adds repositories for read, write, update and delete.
+        /// Adds repositories for create, read, update and delete.
         /// </summary>
         /// <param name="services"></param>
         /// <param name="apiPath">Api endpoint path (eg: contacts).</param>
-        /// <param name="objectKey">Api post body document key (eg: contact).</param>
+        /// <param name="objectKey">Api post body document key (eg: contact). When left null it will automatically singularize.</param>
         /// <typeparam name="TMoneybirdEntity"></typeparam>
         /// <returns></returns>
-        private static IServiceCollection AddReadWriteUpdateDeleteRepository<TMoneybirdEntity>(
+        private static IServiceCollection AddCreateReadUpdateDeleteRepository<TMoneybirdEntity>(
             this IServiceCollection services,
             string apiPath,
-            string objectKey)
+            string objectKey = null)
             where TMoneybirdEntity : class, IMoneybirdEntity
         {
+            if (objectKey == null)
+            {
+                objectKey = apiPath.Singularize();
+            }
+
             services.AddScoped<IMoneybirdRepositoryRead<TMoneybirdEntity>>(
                 s => new MoneybirdRepositoryRead<TMoneybirdEntity>(
                     apiPath,
                     s.GetService<IMoneybirdClient>(),
                     s.GetService<IMoneybirdAdministrationAccessor>()));
 
-            services.AddScoped<IMoneybirdRepositoryStore<TMoneybirdEntity>>(
-                s => new MoneybirdRepositoryStore<TMoneybirdEntity>(
+            services.AddScoped<IMoneybirdRepositoryCreate<TMoneybirdEntity>>(
+                s => new MoneybirdRepositoryCreate<TMoneybirdEntity>(
                     apiPath,
                     objectKey,
                     s.GetService<IMoneybirdClient>(),

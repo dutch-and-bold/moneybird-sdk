@@ -19,9 +19,28 @@ namespace DutchAndBold.MoneybirdSdk.Contracts
         /// Makes an POST request to the Moneybird API.
         /// </summary>
         /// <param name="path"></param>
+        /// <param name="body"></param>
         /// <param name="cancellationToken"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public Task<T> PostAsync<T>(string path, HttpContent body, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Makes an Patch request to the Moneybird API.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="body"></param>
+        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public Task<T> PatchAsync<T>(string path, HttpContent body, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Makes an Delete request to the Moneybird API.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task DeleteAsync(string path, CancellationToken cancellationToken = default);
     }
 }

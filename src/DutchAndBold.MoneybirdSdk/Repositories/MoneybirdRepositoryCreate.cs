@@ -11,8 +11,8 @@ using DutchAndBold.MoneybirdSdk.Extensions;
 
 namespace DutchAndBold.MoneybirdSdk.Repositories
 {
-    public class MoneybirdRepositoryStore<TMoneybirdEntity>
-        : MoneybirdRepositoryBase, IMoneybirdRepositoryStore<TMoneybirdEntity>
+    public class MoneybirdRepositoryCreate<TMoneybirdEntity>
+        : MoneybirdRepositoryBase, IMoneybirdRepositoryCreate<TMoneybirdEntity>
         where TMoneybirdEntity : class, IMoneybirdEntity
     {
         private readonly string _objectKey;
@@ -25,7 +25,7 @@ namespace DutchAndBold.MoneybirdSdk.Repositories
         /// <param name="moneybirdClient">Moneybird client</param>
         /// <param name="administrationAccessor">Administration accessor</param>
         /// <exception cref="ArgumentNullException">Thrown when administrationAccessor is null.</exception>
-        public MoneybirdRepositoryStore(
+        public MoneybirdRepositoryCreate(
             string apiPath,
             string objectKey,
             IMoneybirdClient moneybirdClient,

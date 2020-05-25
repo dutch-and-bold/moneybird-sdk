@@ -54,5 +54,21 @@ namespace DutchAndBold.MoneybirdSdk
                 new JsonSerializerOptions().Moneybird(),
                 cancellationToken);
         }
+
+        /// <inheritdoc cref="IMoneybirdClient"/>
+        public async Task<T> PatchAsync<T>(string path, HttpContent body, CancellationToken cancellationToken = default)
+        {
+            var response = await _httpClient.PatchAsync(path, body, cancellationToken);
+
+            response.EnsureSuccessStatusCode();
+
+            return await ParseResponse<T>(response, cancellationToken);
+        }
+
+        /// <inheritdoc cref="IMoneybirdClient"/>
+        public Task DeleteAsync(string path, CancellationToken cancellationToken = default)
+        {
+            return _httpClient.DeleteAsync(path, cancellationToken);
+        }
     }
 }

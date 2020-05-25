@@ -61,7 +61,7 @@ namespace DutchAndBold.MoneybirdSdk.Domain.Models.ContactAggregate
 
         public string SepaMandateId { get; set; }
 
-        public object SepaMandateDate { get; set; }
+        public DateTime? SepaMandateDate { get; set; }
 
         public string SepaSequenceType { get; set; }
 
@@ -69,19 +69,19 @@ namespace DutchAndBold.MoneybirdSdk.Domain.Models.ContactAggregate
 
         public string CreditCardReference { get; set; }
 
-        public object CreditCardType { get; set; }
+        public string CreditCardType { get; set; }
 
-        public object TaxNumberValidatedAt { get; set; }
+        public DateTime TaxNumberValidatedAt { get; set; }
 
-        public object TaxNumberValid { get; set; }
+        public bool TaxNumberValid { get; set; }
 
-        public object InvoiceWorkflowId { get; set; }
+        public string InvoiceWorkflowId { get; set; }
 
-        public object EstimateWorkflowId { get; set; }
+        public string EstimateWorkflowId { get; set; }
 
         public string SiIdentifier { get; set; }
 
-        public object SiIdentifierType { get; set; }
+        public string SiIdentifierType { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
