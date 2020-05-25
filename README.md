@@ -102,7 +102,7 @@ This directory contains base setup configuration for Microsoft's dependency inje
 
 ## API implementation progress
 
-| Resource                               | Read           |
+| Resource                               | Status         |
 | -------------------------------------- | -------------- |
 | Administration                         | ✅             |
 | Contacts                               | ✅             |
