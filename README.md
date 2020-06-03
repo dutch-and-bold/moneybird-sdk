@@ -91,7 +91,7 @@ This offers an alternative of using the in memory token store variant which will
     |/MoneybirdSdk.Domain
 ```
 
-This project contains the 'domain' of Moneybird. Consisting of entities and repository interfaces.
+This project contains the 'domain' of Moneybird. Consisting of entities and repository interfaces. At this point the project does not follow DDD principles. Entities are kept simple and are mutable.
 
 ```
     |/MoneybirdSdk.Extensions.Microsoft.DependencyInjection
